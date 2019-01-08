@@ -17,8 +17,15 @@ public class WeirdStream {
         .boxed()
         .sorted(Comparator.comparingInt(Integer::bitCount)
             .thenComparing(Comparator.naturalOrder()))
-        .forEach(v ->
-            System.out.printf("%32s, %2d, %,13d%n", Integer.toBinaryString(v), Integer.bitCount(v), v));
+        .map(v -> {
+          String base2 = Integer.toBinaryString(v);
+          StringBuilder builder = new StringBuilder();
+          builder.append(String.format("%,14d (%2d): ", v, Integer.bitCount(v)));
+          builder.append("0".repeat(32 - base2.length()));
+          builder.append(base2);
+          return builder.toString();
+        })
+        .forEach(System.out::println);
   }
 
 }
