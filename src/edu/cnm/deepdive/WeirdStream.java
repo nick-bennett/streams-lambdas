@@ -12,13 +12,13 @@ public class WeirdStream {
 
   public static void main(String[] args) {
     Random rng = new Random(-1); // Reproducible sequence.
-    Comparator<Integer> bitCountComp = (o1, o2) -> Integer.bitCount(o1) - Integer.bitCount(o2);
     IntStream.generate(rng::nextInt)
         .limit(1000)
         .boxed()
-        .sorted(bitCountComp.thenComparing(Comparator.naturalOrder()))
-        .map(Integer::toBinaryString)
-        .forEach(System.out::println);
+        .sorted(Comparator.comparingInt(Integer::bitCount)
+            .thenComparing(Comparator.naturalOrder()))
+        .forEach(v ->
+            System.out.printf("%32s, %2d, %,13d%n", Integer.toBinaryString(v), Integer.bitCount(v), v));
   }
 
 }
