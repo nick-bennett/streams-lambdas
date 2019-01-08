@@ -11,12 +11,7 @@ public class WeirdStream {
   public static void main(String[] args) {
     IntStream.generate(new RandomSupplier())
         .limit(1000)
-        .forEach(new IntConsumer() {
-          @Override
-          public void accept(int value) {
-            System.out.println(value);
-          }
-        });
+        .forEach((v) -> System.out.println(v));
   }
 
   private static class RandomSupplier implements IntSupplier {
