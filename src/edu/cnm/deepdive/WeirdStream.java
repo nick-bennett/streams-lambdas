@@ -11,7 +11,7 @@ public class WeirdStream {
   public static void main(String[] args) {
     IntStream.generate(new RandomSupplier())
         .limit(1000)
-        .forEach((v) -> System.out.println(v));
+        .forEach(System.out::println);
   }
 
   private static class RandomSupplier implements IntSupplier {
@@ -19,7 +19,7 @@ public class WeirdStream {
     private Random rng;
 
     {
-      rng  = new SecureRandom();
+      rng  = new Random(-1); // Reproducible sequence.
     }
 
     @Override
