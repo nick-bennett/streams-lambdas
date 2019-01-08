@@ -33,12 +33,7 @@ public class WeirdStream {
             return result;
           }
         })
-        .map(new Function<Integer, String>() {
-          @Override
-          public String apply(Integer integer) {
-            return Integer.toBinaryString(integer);
-          }
-        })
+        .map(value -> Integer.toBinaryString(value))
         .forEach(System.out::println);
   }
 
