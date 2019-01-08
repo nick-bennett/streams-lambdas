@@ -20,6 +20,8 @@ public class WeirdStream {
       }
     })
         .limit(1000)
+        .boxed()
+        .sorted()
         .forEach(System.out::println);
   }
 
